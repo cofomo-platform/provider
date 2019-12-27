@@ -15,14 +15,14 @@ springdoc:
     path: /v3/swagger-ui
     
 server:
-  port: 8082
+  port: 8083
       
 ---
 
 spring:
   profiles: dev
   datasource:
-    url: jdbc:mysql://localhost:3306/identity
+    url: jdbc:mysql://localhost:3306/provider
     username: root
     password: cofomo.123
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -31,17 +31,17 @@ spring:
       ddl-auto: update
       
 swagger:
-  basepath: http://localhost:8082
+  basepath: http://localhost:8083
   description: Test server on localhost
   
-basepath: http://localhost:8082
+basepath: http://localhost:8083
       
 ---
 
 spring:
   profiles: prod
   datasource:
-    url: jdbc:mysql://mysql:3306/identity
+    url: jdbc:mysql://mysql:3306/provider
     username: root	
     password: cofomo.123
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -50,9 +50,9 @@ spring:
       ddl-auto: update
 
 swagger:
-  basepath: https://authority.cofomo.io/api
+  basepath: https://provider.cofomo.io/api
   description: Test server for deployment
 
-basepath: http://authority.cofomo.io
+basepath: http://provider.cofomo.io
 
 

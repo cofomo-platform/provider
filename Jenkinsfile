@@ -10,14 +10,14 @@ pipeline {
         // Extract information from pom.xml
         IMAGE = readMavenPom().getArtifactId()
         VERSION = readMavenPom().getVersion()
-        DOCUMENTATIONURL = "https://authority.cofomo.io"
+        DOCUMENTATIONURL = "https://provider.cofomo.io"
     }
 
     stages {
         stage('Build Maven') {
             steps {
                 // Get some code from a GitHub repository
-                git 'https://github.com/cofomo-platform/authority'
+                git 'https://github.com/cofomo-platform/provider'
 
                 // Run Maven
                 sh "mvn -Dspring.profiles.active=prod clean package"
@@ -36,22 +36,22 @@ pipeline {
             steps {
                 // Copy all documentation snippets to parent folder
                 sh "cp -r ./target/generated-snippets/. ../DOCS/generated-snippets"
-                sh "cp -r ./src/main/asciidoc/index.adoc ../DOCS/sourcefiles/identity.adoc"
+                sh "cp -r ./src/main/asciidoc/index.adoc ../DOCS/sourcefiles/provider.adoc"
             }
         }
 
         stage('Build Docker Image') {
             steps {
                 // This builds the container
-                sh "docker build . --build-arg version=${VERSION} -t authority:${VERSION}"
+                sh "docker build . --build-arg version=${VERSION} -t provider:${VERSION}"
             }
         }
         stage('Build Docker Container') {
             steps {
                 // This runs the container
-                sh "docker container stop authority"
-                sh "docker container rm authority"
-                sh "docker run --name authority -p 8889:8082 --network cofomo --restart always -d authority:${VERSION}"
+                sh "docker container stop provider"
+                sh "docker container rm provider"
+                sh "docker run --name provider -p 8083:8083 --network cofomo --restart always -d provider:${VERSION}"
             }
             post {
                  // Cleanup
@@ -64,11 +64,11 @@ pipeline {
     post { 
     	// Send success message to Slack
         success { 
-            slackSend color: "good", message: "authority:${VERSION} successfully built and deployed in ${currentBuild.durationString}.\nGo to ${DOCUMENTATIONURL} for more information"
+            slackSend color: "good", message: "provider:${VERSION} successfully built and deployed in ${currentBuild.durationString}.\nGo to ${DOCUMENTATIONURL} for more information"
         }
         // Send failure message to Slack
         failure {
-            slackSend color: "bad", message: "Failure in build and deployment of authority:${VERSION}"
+            slackSend color: "bad", message: "Failure in build and deployment of provider:${VERSION}"
         }
         
     }
