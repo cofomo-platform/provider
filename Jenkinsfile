@@ -51,7 +51,7 @@ pipeline {
                 // This runs the container
                 sh "docker container stop provider"
                 sh "docker container rm provider"
-                sh "docker run --name provider -p 8083:8083 --network cofomo --restart always -d provider:${VERSION}"
+                sh "docker run --name provider -p 127.0.0.1:8083:8083 --network cofomo --restart always -d provider:${VERSION}"
             }
             post {
                  // Cleanup
