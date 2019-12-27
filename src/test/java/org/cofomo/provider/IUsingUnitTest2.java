@@ -69,7 +69,7 @@ public class IUsingUnitTest2 {
 		// action
 		this.mockMvc.perform(post("/v1/using/message").content(objectMapper.writeValueAsString(messageDTO))
 				.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
-				.andDo(document("using-sebd-message", preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint()),
+				.andDo(document("using-send-message", preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint()),
 						requestFields(fieldWithPath("message").description("Message to be send to provider"))))
 				.andDo(print());
 	}
