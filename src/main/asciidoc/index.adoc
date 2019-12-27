@@ -35,6 +35,9 @@ COFOMO-Project, Ilko Hoffmann<ilkohoffmann@posteo.net>
 
 Collection of endpoints to manage bookings on provider site. This is the implementation of the IBooking interface.
 
+=== Booking Model
+include::{snippets}/booking-get-by-id/response-fields.adoc[]
+
 === Get all Bookings
 
 ==== Sample Request
@@ -70,8 +73,8 @@ include::{snippets}/booking-get-by-id/http-response.adoc[]
 
 Create new booking.
 
-==== Sample Request
-include::{snippets}/booking-create-booking/http-request.adoc[]
+==== Request Body
+include::{snippets}/booking-create-booking/request-fields.adoc[]
 
 ==== Sample Response
 include::{snippets}/booking-create-booking/http-response.adoc[]
@@ -124,6 +127,9 @@ include::{snippets}/booking-finish/http-response.adoc[]
 == Invoice API
 
 Collection of endpoints to manage invoices on provider site. This is the implementation of the IInvoice interface.
+
+=== Invoice Model
+include::{snippets}/invoice-get-by-id/response-fields.adoc[]
 
 === Get all Invoices
 

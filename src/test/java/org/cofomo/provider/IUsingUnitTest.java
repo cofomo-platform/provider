@@ -38,7 +38,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @ExtendWith({ RestDocumentationExtension.class, SpringExtension.class })
 @WebMvcTest(UsingController.class)
 @AutoConfigureRestDocs(outputDir = "target/generated-snippets")
-public class IUsingUnitTest2 {
+public class IUsingUnitTest {
 
 	@Autowired
 	private MockMvc mockMvc;
