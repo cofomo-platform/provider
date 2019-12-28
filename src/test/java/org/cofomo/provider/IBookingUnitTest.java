@@ -1,9 +1,6 @@
 package org.cofomo.provider;
 
 import static org.mockito.Mockito.when;
-import static org.springframework.restdocs.headers.HeaderDocumentation.headerWithName;
-import static org.springframework.restdocs.request.RequestDocumentation.*;
-import static org.springframework.restdocs.headers.HeaderDocumentation.requestHeaders;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.documentationConfiguration;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessRequest;
@@ -12,6 +9,7 @@ import static org.springframework.restdocs.operation.preprocess.Preprocessors.pr
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.restdocs.payload.PayloadDocumentation.relaxedRequestFields;
 import static org.springframework.restdocs.payload.PayloadDocumentation.relaxedResponseFields;
+import static org.springframework.restdocs.snippet.Attributes.key;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
@@ -21,13 +19,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import static org.springframework.restdocs.snippet.Attributes.key;
 
 import org.cofomo.commons.domain.exploration.Location;
-import org.springframework.restdocs.constraints.ConstraintDescriptions;
-import org.springframework.restdocs.payload.FieldDescriptor;
 import org.cofomo.commons.domain.exploration.MobilityOption;
-import org.cofomo.commons.domain.exploration.MobilityProvider;
+import org.cofomo.commons.domain.exploration.MobilityProviderEmbedded;
 import org.cofomo.commons.domain.identity.VerifiableClaim;
 import org.cofomo.commons.domain.transaction.Booking;
 import org.cofomo.provider.controller.BookingController;
@@ -42,6 +37,8 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.RestDocumentationContextProvider;
 import org.springframework.restdocs.RestDocumentationExtension;
+import org.springframework.restdocs.constraints.ConstraintDescriptions;
+import org.springframework.restdocs.payload.FieldDescriptor;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -231,32 +228,32 @@ public class IBookingUnitTest {
 	private static MobilityOption createMobilityOption1() {
 		Location location = new Location(48.521637, 8.057645);
 		Date today = new Date();
-		MobilityProvider provider = createMobilityProvider1();
+		MobilityProviderEmbedded provider = createMobilityProvider1();
 		return new MobilityOption(provider, location, today);
 	}
 	
 	private static MobilityOption createMobilityOption2() {
 		Location location = new Location(48.521637, 8.057645);
 		Date today = new Date();
-		MobilityProvider provider = createMobilityProvider2();
+		MobilityProviderEmbedded provider = createMobilityProvider2();
 		return new MobilityOption(provider, location, today);
 	}
 
-	private static MobilityProvider createMobilityProvider1() {
+	private static MobilityProviderEmbedded createMobilityProvider1() {
 		List<String> serviceOffers = new ArrayList<String>();
 		List<Integer> areas = new ArrayList<Integer>();
 		serviceOffers.add("carsharing");
 		areas.add(72072);
-		return new MobilityProvider("Carsharing Inc.", "https://test.carsharing.org", areas, serviceOffers);
+		return new MobilityProviderEmbedded("Carsharing Inc.", "https://test.carsharing.org", areas, serviceOffers);
 	}
 
-	private static MobilityProvider createMobilityProvider2() {
+	private static MobilityProviderEmbedded createMobilityProvider2() {
 		List<String> serviceOffers = new ArrayList<String>();
 		List<Integer> areas = new ArrayList<Integer>();
 		serviceOffers.add("bikesharing");
 		serviceOffers.add("escootersharing");
 		areas.add(72073);
-		return new MobilityProvider("BikeSharing Inc.", "https://test.bikesharing.org", areas, serviceOffers);
+		return new MobilityProviderEmbedded("BikeSharing Inc.", "https://test.bikesharing.org", areas, serviceOffers);
 	}
 	
 	private static class ConstrainedFields {
