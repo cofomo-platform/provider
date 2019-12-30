@@ -133,7 +133,7 @@ include::{snippets}/invoice-get-by-id/response-fields.adoc[]
 
 === Get all Invoices
 
-Gets all Unvoices by the API.
+Gets all Invoices by the API.
 
 ==== Sample Request
 include::{snippets}/invoice-get-all/http-request.adoc[]
@@ -144,7 +144,7 @@ include::{snippets}/invoice-get-all/http-response.adoc[]
 
 === Get all Invoices by status
 
-Gets all Invoices by the status.
+Gets all Invoices by status.
 
 ==== Sample Request
 include::{snippets}/invoice-get-all-by-status/http-request.adoc[]
@@ -155,7 +155,7 @@ include::{snippets}/invoice-get-all-by-status/http-response.adoc[]
 
 === Get Invoices by id
 
-Get Invoice by its id.
+Get Invoice by id.
 
 ==== Sample Request
 include::{snippets}/invoice-get-by-id/http-request.adoc[]

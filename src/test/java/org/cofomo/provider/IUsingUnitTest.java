@@ -54,7 +54,7 @@ public class IUsingUnitTest {
 
 		this.mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext)
 				.apply(documentationConfiguration(restDocumentation).uris().withScheme("https")
-						.withHost("provider.cofomo.org").withPort(443))
+						.withHost("provider.cofomo.io/api").withPort(443))
 				.alwaysDo(
 						document("{method-name}", preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint())))
 				.build();
